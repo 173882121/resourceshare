@@ -1,0 +1,50 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Payment</title>
+</head>
+<body>
+
+    <h1>支付页面</h1>
+    资源地址：@ViewBag.ToResourceUrl
+
+    <input type="hidden" data-fuStr="@ViewBag.FromUrlstr" id="fuStr" />
+    <input type="hidden" data-rUrl="@ViewBag.ToResourceUrl" id="rUrl"/>
+    <br />
+    支付后可见解压密码
+    <div>
+
+        <img src="~/Images/1553676036.png" alt="Alternate Text" />
+
+    </div>
+    <input type="button" id="btn" name="name" value="点击这里" />
+</body>
+</html>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script>
+
+    document.getElementById("btn").onclick = (event) => {
+
+        //这假设用户已经付款了
+
+        //可以提供资源地址等相关信息，FromUrlStr便于在数据库中查找
+
+        let rUrl = document.getElementById("rUrl").getAttribute("data-rUrl");
+        let fuStr = document.getElementById("fuStr").getAttribute("data-fuStr");
+        $.post("/Home/Paid", {rUrl:rUrl,fuStr:fuStr},function (uCode) {
+
+            alert("解压密码是："+uCode+"请妥善保管。");
+        });
+
+
+    }
+
+
+</script>
