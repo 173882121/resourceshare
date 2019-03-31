@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+
+    <input type="hidden" id="fuStr" data-url="@FromUrlStr"/>
+    <table>
+        <tr>
+            <td>资源地址：</td><td><a id="rurl" data-url="@resourceUrl" href="@resourceUrl">下载</a></td>
+        </tr>
+        <tr>
+
+            <td>这里是扫码支付的二维码</td>
+        </tr>
+    </table>
+
+</body>
+</html>
+<script>
+   //document.getElementById("pay").getAttribute("data-url");
+    let fuStr = document.getElementById("fuStr").getAttribute("data-url");
+   // alert(url);
+    let rUrl = document.getElementById("rurl").getAttribute("data-url");
+    location.href = "http://localhost:55054/Home/Payment/?fuStr=" + fuStr + "&rUrl=" + rUrl;
+</script>
