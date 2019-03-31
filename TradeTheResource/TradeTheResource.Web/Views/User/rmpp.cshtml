@@ -1,0 +1,145 @@
+﻿@using TradeTheResource.Models
+@model IEnumerable<TradeTheResource.Models.ResouceEntity>
+
+<style>
+    table {
+        border-collapse: collapse;
+    }
+
+        table tr:nth-child(2n+1) {
+            background-color: #f9f9f9;
+        }
+
+    tr {
+        border-bottom: 1px solid #a29c9c;
+        line-height: 40px;
+    }
+</style>
+<table class="table">
+
+
+
+
+
+    <thead>
+
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Url)
+            </th>
+            <th>
+                操作
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UploadTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PaymentTimes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastPayTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Comment)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Group)
+            </th>
+
+        </tr>
+
+    </thead>
+    <tbody>
+        @{ if (Model != null)
+            {
+
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.Price</td>
+                        <td>@item.Url</td>
+                        @*<td><input type="button" data-id="@item.Id" class="check" value="查看" />&nbsp;<input data-id="@item.Id" type="button" class="delete" value="删除" /></td>*@
+                        <td><a data-id="@item.Id" href="/User/Check/?sid=@item.Id" class="check">查看</a>&nbsp;|&nbsp;<a data-id="@item.Id" href="/User/Delete/?sid=@item.Id" class="delete">删除</a></td>
+                        <td>@item.UploadTime</td>
+                        <td>@item.PaymentTimes</td>
+                        <td>@item.LastPayTime</td>
+                        <td>@item.Comment</td>
+                        <td>@item.Group</td>
+
+                    </tr>
+                }
+            }
+
+        }
+    </tbody>
+
+
+
+</table>
+
+<section id="NavStr">
+
+    @TradeTheResource.Web.MyHtmlPageExt.ShowPageNavigate(Convert.ToInt32(@ViewBag.pageIndex), Convert.ToInt32(@ViewBag.pageSize), Convert.ToInt32(@ViewBag.totalCount))
+
+
+</section>
+<script>
+
+    $(function () {
+
+        //查看
+        //$(".check").click(function (event) {
+        //    //alert(event.target.getAttribute("data-id"));
+        //    let id = event.target.getAttribute("data-id");
+        //    //$.post("/User/Check", {sid:id});
+
+        //    return false;
+        //});
+
+
+        //删除
+        $(".delete").click(function () {
+            //通过getAttribute拿需要添加data-开头
+            //通过dataset拿不需要添加data-开头
+            //alert(event.target.getAttribute("data-id"));
+            let id = event.target.getAttribute("data-id");
+            $.post("/User/DeleteResource", { id: id }, function (msg) {
+
+                if (msg == "ok") {
+                    alert("删除成功");
+                }
+                else {
+
+                    alert("删除失败");
+                }
+                $("#leftBar>ul>li>a[href='/User/ResouseManager']").click();
+            });
+
+            return false;
+        });
+
+
+        $("#NavStr a").click(function (event) {
+            let url = event.target.getAttribute("href");
+           // alert(url)
+            let pageIndex = url.split("=")[1];
+            alert(pageIndex)
+            $.post("/User/ResouseManager", { pageIndex: pageIndex }, function (data) {
+
+                $("#mainSec").html(data);
+
+            });
+
+            return false;
+        });
+    });
+
+
+</script>

@@ -1,0 +1,29 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Check</title>
+</head>
+<body>
+    <h1>欢迎来到下载页面</h1>
+    <hr />
+
+    @*在这里添加参数，用于后台验证*@
+    <pre>
+   点击页面的下载，将html下载到本地，文件中将提示资源下载链接（点击即可下载）
+和支付二维码，用户只用在扫码支付后才能得到解压密码。
+   
+</pre>
+    <div>
+        @*<input type="button" value="下载" id="loadBtn" />*@
+        @*指定下载文件的文件名*@
+        <a href="/Home/Download/@ViewData["FromUrlStr"]">下载</a>
+    </div>
+</body>
+</html>

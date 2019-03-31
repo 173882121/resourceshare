@@ -1,0 +1,139 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Manage</title>
+    <style>
+
+        * {
+            /*border: 1px solid red;*/
+        }
+
+        html, body {
+            padding: 0px;
+            margin: 0px;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+        }
+
+        #head {
+            height: 100px;
+            width: 100%;
+            border-bottom: 2px solid black;
+        }
+
+        #leftBar {
+            float: left;
+            width: 10%;
+            min-width: 170px;
+            border-right: 2px solid black;
+            height: auto;
+            min-height: 800px;
+            /*height:100px;*/
+            font-size:18px;
+        }
+
+        ul, li {
+            list-style: none;
+            line-height:50px;
+        }
+
+            ul > li > a {
+            text-decoration-line:none;
+            }
+
+            ul > li > a:hover {
+                font-size:20px;
+                color:red;
+            }
+
+        #mainSec {
+            float: right;
+            /*margin-left: 150px;*/
+            margin-right: 0px;
+            height: 100%;
+            min-height:800px;
+            /*border: 1px solid red;*/
+            width:79%;
+            
+        }
+
+        #footer {
+            clear: both;
+            width: 100%;
+            height: 50px;
+            border: 1px solid red;
+        }
+
+  
+    </style>
+</head>
+<body>
+    @*head*@
+    <section id="head">
+
+        <h1>资源交易平台</h1>
+    </section>
+
+    @*left*@
+    <section id="leftBar">
+
+        <ul>
+
+            <li>@Html.ActionLink("个人中心", "UserCenter", "User")</li>
+
+
+
+            <li>  @Html.ActionLink("修改资料", "EditUserData", "User")</li>
+
+
+
+            <li>@Html.ActionLink("资源管理", "ResouseManager", "User")</li>
+
+
+
+            <li> @Html.ActionLink("上传资源", "UploadResouse", "User")</li>
+        </ul>
+    </section>
+
+    @*mainSec*@
+    <section id="mainSec"></section>
+
+
+    @*footer*@
+    <section id="footer">
+
+        版权所有，违者必究。
+    </section>
+</body>
+</html>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+
+
+        $("#leftBar>ul>li>a").click((event) => {
+            //let classify = event.target.getAttribute("data-text");
+            let url = event.target.getAttribute("href");
+            //alert(url);
+            $.get(url, {}, function (data) {
+                $("#mainSec").html(data);
+
+
+            })
+
+            return false;
+        });
+
+
+    });
+
+
+</script>

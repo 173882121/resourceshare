@@ -1,0 +1,58 @@
+﻿@model TradeTheResource.Models.UserEntity
+
+<style>
+    td{
+
+        text-align:left;
+    }
+    /*给tr添加border边框需要首先添加table{border-collapse:collapse;}*/ 
+    table {
+        border-collapse: collapse;
+      
+    }
+
+    input, table {
+        font-size: 24px;
+    }
+    tr{
+        border-bottom:1px solid #afa7a7;
+    }
+    </style>
+
+<div style="margin-top:20px;">
+
+    <table>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.Account)</td>
+            <td>@Html.TextBoxFor((model => model.Account),new {@readonly="readonly" })</td>
+        </tr>
+
+        <tr>
+            <td> @Html.DisplayNameFor(model => model.ShowName)</td>
+            <td>  @Html.TextBoxFor((model => model.ShowName),new {@readonly="readonly" })</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.QQ)</td>
+            <td> @Html.TextBoxFor((model => model.QQ),new {@readonly="readonly" })</td>
+        </tr>
+        <tr>
+            <td>   @Html.DisplayNameFor(model => model.Email)</td>
+            <td>    @Html.TextBoxFor((model => model.Email),new {@readonly="readonly" })</td>
+        </tr>
+        <tr>
+            <td> @Html.DisplayNameFor(model => model.Phone)</td>
+            <td> @Html.TextBoxFor((model => model.Phone),new {@readonly="readonly" })</td>
+        </tr>
+        <tr>
+            <td>  @Html.DisplayNameFor(model => model.Balance)</td>
+            <td> @Html.TextBoxFor((model => model.Balance),new {@readonly="readonly" })</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.PaymentAccount)</td>
+            <td>@Html.TextBoxFor((model => model.PaymentAccount),new {@readonly="readonly" })</td>
+        </tr>
+    </table>
+
+
+</div>
+

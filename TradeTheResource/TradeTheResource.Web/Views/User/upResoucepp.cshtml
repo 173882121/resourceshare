@@ -1,0 +1,61 @@
+﻿<form id="frm">
+    <table>
+            <tr>
+                <td>图片价格</td>
+                <td><input type="number" id="price" name="price" placeholder="最小金额为0.1元" />元</td>
+            </tr>
+            <tr>
+                <td>资源地址</td>
+                <td><input type="text" id="surl" name="surl" placeholder="资源的完整地址" /></td>
+            </tr>
+            <tr>
+                <td>解压密码</td>
+                <td><input type="text" id="UnpackCode" name="UnpackCode" placeholder="解压码" /></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" id="btn" value="提交" /></td>
+            </tr>
+        </table>
+
+
+    @*<input type="number" id="price" name="price" placeholder="最小金额为0.1元" />
+    <input type="text" id="surl" name="surl" placeholder="资源的完整地址" />
+    <input type="text" id="UnpackCode" name="UnpackCode" placeholder="解压码" />
+    <input type="button" id="btn" value="提交" />*@
+</form>
+
+<script>
+
+    $(function () {
+        //使用jq 序列化整个表单，需要提供name属性，不然会不能生成序列化数据
+
+        //提交
+        $("#btn").click(function () {
+            //serializeArray 生成是是json对象[ 
+            //{ name: 'firstname', value: 'Hello' },
+            //{ name: 'lastname', value: 'World' },
+            //{ name: 'alias' }], // 值为空
+
+            //console.log($("#frm").serializeArray());
+            //serialize 生成的是json字符串 a=1&b=2&c=3&d=4&e=5
+            let frmData = $("#frm").serialize();
+            
+           // alert(frmData);
+            $.post("/User/UploadResouse",/* $("#frm").serializeArray()*/ frmData , function (msg) {
+
+                if (msg == "ok") {
+                    alert("上传成功");
+                }
+                else {
+
+                    alert("上传失败");
+                }
+            });
+
+        });
+
+    });
+
+
+</script>
